@@ -7,6 +7,6 @@
 
 An SF Symbols Viewer for Swift Playgrounds on iPadOS.
 
-[Symbols.swift](/SF Symbols Viewer.playgroundbook/UserModules/UserModule.playgroundmodule/Sources/Symbols.swift) is from [SFSymbolsGenerator](https://github.com/noahsark769/SFSymbolsGenerator) by [@noahsark769](https://github.com/noahsark769).
+[Symbols.swift](/SF%20Symbols%20Viewer.playgroundbook/UserModules/UserModule.playgroundmodule/Sources/Symbols.swift) is from [SFSymbolsGenerator](https://github.com/noahsark769/SFSymbolsGenerator) by [@noahsark769](https://github.com/noahsark769).
 
 ![](https://i.imgur.com/gRSWXem.png)
