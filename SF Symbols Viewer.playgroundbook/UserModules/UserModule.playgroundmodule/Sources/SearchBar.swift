@@ -32,7 +32,8 @@ extension SearchBar {
         }
         
         public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            self.text = searchText}
+            self.text = searchText
+        }
         
         public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
             searchBar.resignFirstResponder()
