@@ -7,9 +7,9 @@
 		<string>SF Symbols Viewer.playgroundchapter</string>
 	</array>
 	<key>ContentIdentifier</key>
-	<string>com.apple.playgrounds.blank</string>
+	<string>xyz.kebo.playgroundbook.SFSymbolsViewer.SFSymbolsViewer</string>
 	<key>ContentVersion</key>
-	<string>1.0</string>
+	<string>1.0.0</string>
 	<key>DeploymentTarget</key>
 	<string>ios-current</string>
 	<key>DevelopmentRegion</key>

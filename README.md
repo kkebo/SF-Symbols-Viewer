@@ -1,3 +1,5 @@
+![](/images/banner.png)
+
 # SF Symbols Viewer
 
 [![Swift](https://img.shields.io/badge/Swift-5.1-orange.svg)](https://developer.apple.com/swift/)
