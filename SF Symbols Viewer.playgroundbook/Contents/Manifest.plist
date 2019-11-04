@@ -7,7 +7,7 @@
 		<string>SF Symbols Viewer.playgroundchapter</string>
 	</array>
 	<key>ContentIdentifier</key>
-	<string>xyz.kebo.playgroundbook.SFSymbolsViewer.SFSymbolsViewer</string>
+	<string>xyz.kebo.playgroundbook.SF-Symbols-Viewer.SF-Symbols-Viewer</string>
 	<key>ContentVersion</key>
 	<string>1.0.1</string>
 	<key>DeploymentTarget</key>
