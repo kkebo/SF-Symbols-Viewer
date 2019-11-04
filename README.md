@@ -11,4 +11,6 @@ An SF Symbols Viewer for Swift Playgrounds on iPadOS.
 
 [Symbols.swift](/SF%20Symbols%20Viewer.playgroundbook/UserModules/UserModule.playgroundmodule/Sources/Symbols.swift) is from [SFSymbolsGenerator](https://github.com/noahsark769/SFSymbolsGenerator) by [@noahsark769](https://github.com/noahsark769).
 
+[Subscribe to the feed on your iPad](https://developer.apple.com/ul/sp0?url=https://kebo.xyz/SF-Symbols-Viewer/feed.json)
+
 ![](https://i.imgur.com/gRSWXem.png)
