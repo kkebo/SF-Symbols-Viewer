@@ -4,6 +4,8 @@ import SwiftUI
 
 class ViewModel: ObservableObject {
     @Published var keyword = ""
+    @Published var fontSize = 60.0
+    @Published var textFormatIsVisible = false
     @Published var symbols = Symbols.symbols
     
     private var cancellables = Set<AnyCancellable>()
@@ -34,14 +36,35 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            SearchBar(text: self.$viewModel.keyword)
+            HStack {
+                SearchBar(text: self.$viewModel.keyword)
+                Button(action: {
+                    self.viewModel.textFormatIsVisible = true
+                }) {
+                    Image(systemName: "textformat.size")
+                }
+                .padding([.trailing])
+                .popover(isPresented: self.$viewModel.textFormatIsVisible) {
+                    VStack {
+                        Text("\(self.viewModel.fontSize)")
+                        HStack {
+                            Image(systemName: "textformat")
+                                .font(.system(size: 10))
+                            Slider(value: self.$viewModel.fontSize, in: 0...120)
+                            Image(systemName: "textformat")
+                                .font(.system(size: 20))
+                        }
+                    }
+                    .padding()
+                }
+            }
             List {
-                ForEach(viewModel.symbols, id: \.self) { name in
+                ForEach(self.viewModel.symbols, id: \.self) { name in
                     HStack {
                         Spacer()
                         VStack {
                             Image(systemName: name)
-                                .font(.system(size: 60))
+                                .font(.system(size: CGFloat(self.viewModel.fontSize)))
                                 .padding()
                             HStack {
                                 Text(name)
@@ -54,6 +77,7 @@ struct ContentView: View {
                         }
                         Spacer()
                     }
+                    .padding()
                 }
             }
         }
