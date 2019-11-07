@@ -1,22 +1,27 @@
-import SwiftUI
+import Combine
 import PlaygroundSupport
+import SwiftUI
 
 class ViewModel: ObservableObject {
     @Published var keyword = ""
     @Published var symbols = Symbols.symbols
     
+    private var cancellables = Set<AnyCancellable>()
+    
     init(scheduler: DispatchQueue = DispatchQueue(label: "ViewModel")) {
-        _ = self.$keyword
+        self.$keyword
             .dropFirst(1)
             .debounce(for: .seconds(0.5), scheduler: scheduler)
-            .sink { keyword in
+            .receive(on: DispatchQueue.main)
+            .map { keyword in
                 if keyword.count > 0 {
-                    self.symbols = Symbols.symbols
-                        .filter { $0.contains(keyword) }
+                    return Symbols.symbols.filter { $0.contains(keyword) }
                 } else {
-                    self.symbols = Symbols.symbols
+                    return Symbols.symbols
                 }
             }
+            .assign(to: \.symbols, on: self)
+            .store(in: &self.cancellables)
     }
 }
 
