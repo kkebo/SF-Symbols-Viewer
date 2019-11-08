@@ -59,7 +59,6 @@ struct ContentView: View {
                 .padding([.trailing])
                 .popover(isPresented: self.$viewModel.textFormatIsVisible) {
                     VStack {
-                        Text("\(self.viewModel.fontSize)")
                         Picker("Font Weights", selection: self.$viewModel.fontWeight) {
                             ForEach(self.viewModel.fontWeights, id: \.self) { weight in
                                 Image(systemName: "textformat")
