@@ -5,8 +5,21 @@ import SwiftUI
 class ViewModel: ObservableObject {
     @Published var keyword = ""
     @Published var fontSize = 60.0
+    @Published var fontWeight = Font.Weight.regular
     @Published var textFormatIsVisible = false
     @Published var symbols = Symbols.symbols
+    
+    let fontWeights = [
+        Font.Weight.ultraLight,
+        .thin,
+        .light,
+        .regular,
+        .medium,
+        .semibold,
+        .bold,
+        .heavy,
+        .black,
+    ]
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -47,6 +60,14 @@ struct ContentView: View {
                 .popover(isPresented: self.$viewModel.textFormatIsVisible) {
                     VStack {
                         Text("\(self.viewModel.fontSize)")
+                        Picker("Font Weights", selection: self.$viewModel.fontWeight) {
+                            ForEach(self.viewModel.fontWeights, id: \.self) { weight in
+                                Image(systemName: "textformat")
+                                    .font(.system(size: 10, weight: weight))
+                                    .tag(weight)
+                            }
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
                         HStack {
                             Image(systemName: "textformat")
                                 .font(.system(size: 10))
@@ -64,7 +85,7 @@ struct ContentView: View {
                         Spacer()
                         VStack {
                             Image(systemName: name)
-                                .font(.system(size: CGFloat(self.viewModel.fontSize)))
+                                .font(.system(size: CGFloat(self.viewModel.fontSize), weight: self.viewModel.fontWeight))
                                 .padding()
                             HStack {
                                 Text(name)
