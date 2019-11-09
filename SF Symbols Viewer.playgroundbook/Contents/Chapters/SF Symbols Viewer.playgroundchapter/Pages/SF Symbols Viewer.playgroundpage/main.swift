@@ -25,7 +25,7 @@ class ViewModel: ObservableObject {
     
     init(scheduler: DispatchQueue = DispatchQueue(label: "ViewModel")) {
         self.$keyword
-            .dropFirst(1)
+            .dropFirst()
             .debounce(for: .seconds(0.5), scheduler: scheduler)
             .receive(on: DispatchQueue.main)
             .map { keyword in
