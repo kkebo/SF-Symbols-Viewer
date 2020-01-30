@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
       with:
         fetch-depth: 1
     - name: Build
@@ -65,11 +65,10 @@ jobs:
             ]
         }
         EOF
+        mkdir public && mv SF\ Symbols\ Viewer.playgroundbook.zip feed.json public/
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@2.0.3
-      env:
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BASE_BRANCH: master
         BRANCH: gh-pages
         FOLDER: public
-        BUILD_SCRIPT: mkdir public && mv SF\ Symbols\ Viewer.playgroundbook.zip feed.json public/
