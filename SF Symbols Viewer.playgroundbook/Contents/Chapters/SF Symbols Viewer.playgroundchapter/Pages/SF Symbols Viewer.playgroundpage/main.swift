@@ -105,4 +105,4 @@ struct ContentView: View {
     }
 }
 
-PlaygroundPage.current.liveView = UIHostingController(rootView: ContentView(viewModel: ViewModel()))
+PlaygroundPage.current.setLiveView(ContentView(viewModel: ViewModel()))
