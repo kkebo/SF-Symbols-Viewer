@@ -28,7 +28,7 @@ jobs:
         DOCUMENT_OVERVIEW_SUBTITLE: SF Symbols Browser for iPadOS.
         DOCUMENT_DESCRIPTION: You can browse SF Symbols.
         DOCUMENT_CONTENT_IDENTIFIER: xyz.kebo.playgroundbook.SF-Symbols-Viewer.SF-Symbols-Viewer
-        DOCUMENT_URL: SF%20Symbols%20Viewer.playgroundbook.zip
+        DOCUMENT_URL: https://kebo.xyz/SF-Symbols-Viewer/SF%20Symbols%20Viewer.playgroundbook.zip
         PLAYGROUNDBOOK_FILENAME: SF Symbols Viewer.playgroundbook
       run: |
         zip -r "${PLAYGROUNDBOOK_FILENAME}.zip" "${PLAYGROUNDBOOK_FILENAME}"
