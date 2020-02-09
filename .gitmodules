@@ -1,0 +1,3 @@
+[submodule "SF Symbols Viewer.playgroundbook/Contents/Modules/Grid.playgroundmodule"]
+	path = SF Symbols Viewer.playgroundbook/Contents/Modules/Grid.playgroundmodule
+	url = https://github.com/spacenation/swiftui-grid.git

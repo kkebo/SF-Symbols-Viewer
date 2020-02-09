@@ -1,6 +1,7 @@
 import Combine
 import PlaygroundSupport
 import SwiftUI
+import Grid
 
 class ViewModel: ObservableObject {
     @Published var keyword = ""
@@ -78,26 +79,31 @@ struct ContentView: View {
                     .padding()
                 }
             }
-            List(self.viewModel.symbols, id: \.self) { name in
-                HStack {
-                    Spacer()
-                    VStack {
-                        Image(systemName: name)
-                            .font(.system(size: CGFloat(self.viewModel.fontSize), weight: self.viewModel.fontWeight))
-                            .padding()
-                        HStack {
-                            Text(name)
-                            Button(action: {
-                                UIPasteboard.general.string = name
-                            }) {
-                                Image(systemName: "doc.on.clipboard")
+            ScrollView {
+                Grid(self.viewModel.symbols, id: \.self) { name in
+                    HStack {
+                        Spacer()
+                        VStack {
+                            Image(systemName: name)
+                                .font(.system(size: CGFloat(self.viewModel.fontSize), weight: self.viewModel.fontWeight))
+                                .padding()
+                            HStack {
+                                Text(name)
+                                Button(action: {
+                                    UIPasteboard.general.string = name
+                                }) {
+                                    Image(systemName: "doc.on.clipboard")
+                                }
                             }
                         }
+                        Spacer()
                     }
-                    Spacer()
+                    .padding()
                 }
-                .padding()
             }
+            .gridStyle(
+                ModularGridStyle(columns: .min(200), rows: .fixed(200))
+            )
             Spacer()
         }
     }
