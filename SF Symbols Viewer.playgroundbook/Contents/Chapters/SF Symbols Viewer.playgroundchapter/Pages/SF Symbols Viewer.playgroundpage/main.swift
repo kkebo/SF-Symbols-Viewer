@@ -1,6 +1,7 @@
 import Combine
 import PlaygroundSupport
 import SwiftUI
+import Grid
 
 class ViewModel: ObservableObject {
     @Published var keyword = ""
@@ -78,7 +79,7 @@ struct ContentView: View {
                     .padding()
                 }
             }
-            List(self.viewModel.symbols, id: \.self) { name in
+            Grid(self.viewModel.symbols, id: \.self) { name in
                 HStack {
                     Spacer()
                     VStack {
@@ -98,6 +99,9 @@ struct ContentView: View {
                 }
                 .padding()
             }
+            .gridStyle(
+                ModularGridStyle(columns: .min(200), rows: .min(200))
+            )
             Spacer()
         }
     }
