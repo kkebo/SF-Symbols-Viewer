@@ -78,27 +78,25 @@ struct ContentView: View {
                     .padding()
                 }
             }
-            List {
-                ForEach(self.viewModel.symbols, id: \.self) { name in
-                    HStack {
-                        Spacer()
-                        VStack {
-                            Image(systemName: name)
-                                .font(.system(size: CGFloat(self.viewModel.fontSize), weight: self.viewModel.fontWeight))
-                                .padding()
-                            HStack {
-                                Text(name)
-                                Button(action: {
-                                    UIPasteboard.general.string = name
-                                }) {
-                                    Image(systemName: "doc.on.clipboard")
-                                }
+            List(self.viewModel.symbols, id: \.self) { name in
+                HStack {
+                    Spacer()
+                    VStack {
+                        Image(systemName: name)
+                            .font(.system(size: CGFloat(self.viewModel.fontSize), weight: self.viewModel.fontWeight))
+                            .padding()
+                        HStack {
+                            Text(name)
+                            Button(action: {
+                                UIPasteboard.general.string = name
+                            }) {
+                                Image(systemName: "doc.on.clipboard")
                             }
                         }
-                        Spacer()
                     }
-                    .padding()
+                    Spacer()
                 }
+                .padding()
             }
             Spacer()
         }
