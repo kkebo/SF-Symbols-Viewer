@@ -1,4 +1,3 @@
-import Combine
 import PlaygroundSupport
 import SwiftUI
 
@@ -7,7 +6,6 @@ class ViewModel: ObservableObject {
     @Published var fontSize = 60.0
     @Published var fontWeight = Font.Weight.regular
     @Published var textFormatIsVisible = false
-    @Published var symbols = Symbols.symbols
     
     let fontWeights = [
         Font.Weight.ultraLight,
@@ -20,24 +18,6 @@ class ViewModel: ObservableObject {
         .heavy,
         .black,
     ]
-    
-    private var cancellables = Set<AnyCancellable>()
-    
-    init(scheduler: DispatchQueue = DispatchQueue(label: "ViewModel")) {
-        self.$keyword
-            .dropFirst()
-            .debounce(for: .seconds(0.5), scheduler: scheduler)
-            .receive(on: DispatchQueue.main)
-            .map { keyword in
-                if keyword.count > 0 {
-                    return Symbols.symbols.filter { $0.contains(keyword) }
-                } else {
-                    return Symbols.symbols
-                }
-            }
-            .assign(to: \.symbols, on: self)
-            .store(in: &self.cancellables)
-    }
 }
 
 struct ContentView: View {
@@ -78,7 +58,11 @@ struct ContentView: View {
                     .padding()
                 }
             }
-            List(self.viewModel.symbols, id: \.self) { name in
+            List(
+                Symbols.symbols
+                    .filter { self.viewModel.keyword.isEmpty ? true : $0.contains(self.viewModel.keyword) },
+                id: \.self
+            ) { name in
                 HStack {
                     Spacer()
                     VStack {
@@ -98,6 +82,7 @@ struct ContentView: View {
                 }
                 .padding()
             }
+            .id(UUID())
             Spacer()
         }
     }
