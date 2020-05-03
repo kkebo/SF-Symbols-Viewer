@@ -7,8 +7,8 @@ public struct SearchBar: UIViewRepresentable {
         self._text = text
     }
     
-    public func makeCoordinator() -> Coordinator {
-        return Coordinator(text: self.$text)
+    public func makeCoordinator() -> Self.Coordinator {
+        return Self.Coordinator(text: self.$text)
     }
     
     public func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
@@ -25,7 +25,7 @@ public struct SearchBar: UIViewRepresentable {
 }
 
 extension SearchBar {
-    public class Coordinator: NSObject, UISearchBarDelegate {
+    public final class Coordinator: NSObject, UISearchBarDelegate {
         @Binding var text: String
         
         init(text: Binding<String>) {

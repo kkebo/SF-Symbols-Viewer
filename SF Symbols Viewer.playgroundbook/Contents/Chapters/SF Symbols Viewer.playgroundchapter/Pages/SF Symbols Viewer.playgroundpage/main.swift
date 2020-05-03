@@ -1,7 +1,7 @@
 import PlaygroundSupport
 import SwiftUI
 
-class ViewModel: ObservableObject {
+final class ViewModel: ObservableObject {
     @Published var keyword = ""
     @Published var fontSize = 60.0
     @Published var fontWeight = Font.Weight.regular
