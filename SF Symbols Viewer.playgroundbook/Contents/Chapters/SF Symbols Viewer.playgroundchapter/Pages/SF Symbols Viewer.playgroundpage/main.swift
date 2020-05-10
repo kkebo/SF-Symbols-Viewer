@@ -1,12 +1,12 @@
 import PlaygroundSupport
 import SwiftUI
 
-final class ViewModel: ObservableObject {
+final class ViewModel {
     @Published var keyword = ""
     @Published var fontSize = 60.0
     @Published var fontWeight = Font.Weight.regular
     @Published var textFormatIsVisible = false
-    
+
     let fontWeights = [
         Font.Weight.ultraLight,
         .thin,
@@ -20,13 +20,13 @@ final class ViewModel: ObservableObject {
     ]
 }
 
-struct ContentView: View {
+extension ViewModel: ObservableObject {}
+
+struct ContentView {
     @ObservedObject var viewModel: ViewModel
-    
-    init(viewModel: ViewModel) {
-        self.viewModel = viewModel
-    }
-    
+}
+
+extension ContentView: View {
     var body: some View {
         VStack {
             HStack {
