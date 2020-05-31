@@ -23,7 +23,7 @@ final class ViewModel {
 extension ViewModel: ObservableObject {}
 
 struct ContentView {
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel = ViewModel()
 }
 
 extension ContentView: View {
@@ -88,4 +88,4 @@ extension ContentView: View {
     }
 }
 
-PlaygroundPage.current.setLiveView(ContentView(viewModel: ViewModel()))
+PlaygroundPage.current.setLiveView(ContentView())
