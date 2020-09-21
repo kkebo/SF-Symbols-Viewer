@@ -11,4 +11,4 @@ An SF Symbols Viewer for Swift Playgrounds on iPadOS.
 
 [Subscribe to the feed on your iPad](https://developer.apple.com/ul/sp0?url=https://kebo.xyz/SF-Symbols-Viewer/feed.json)
 
-![](https://i.imgur.com/gRSWXem.png)
+![](/images/screenshot.png)
