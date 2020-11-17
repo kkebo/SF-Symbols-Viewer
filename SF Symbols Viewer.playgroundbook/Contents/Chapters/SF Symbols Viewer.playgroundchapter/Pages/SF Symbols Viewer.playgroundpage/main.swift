@@ -1,89 +1,53 @@
 import PlaygroundSupport
 import SwiftUI
 
-final class ViewModel {
-    @Published var keyword = ""
-    @Published var fontSize = 60.0
-    @Published var fontWeight = Font.Weight.regular
-    @Published var textFormatIsVisible = false
-
-    let fontWeights = [
-        Font.Weight.ultraLight,
-        .thin,
-        .light,
-        .regular,
-        .medium,
-        .semibold,
-        .bold,
-        .heavy,
-        .black,
-    ]
-}
-
-extension ViewModel: ObservableObject {}
-
 struct ContentView {
-    @ObservedObject var viewModel = ViewModel()
+    @State var keyword = ""
+    @State var fontSize = 60.0
+    @State var fontWeight = Font.Weight.regular
+    @State var textFormatIsVisible = false
+    let columns = [GridItem(.adaptive(minimum: 200))]
+
+    var symbols: [String] {
+        Symbols.symbols
+            .filter { self.keyword.isEmpty ? true : $0.contains(self.keyword) }
+    }
+
+    func showTextFormat() {
+        self.textFormatIsVisible = true
+    }
 }
 
 extension ContentView: View {
     var body: some View {
         VStack {
             HStack {
-                SearchBar(text: self.$viewModel.keyword)
-                Button(action: {
-                    self.viewModel.textFormatIsVisible = true
-                }) {
+                SearchBar(text: self.$keyword)
+                Button(action: self.showTextFormat) {
                     Image(systemName: "textformat.size")
                 }
-                .padding([.trailing])
-                .popover(isPresented: self.$viewModel.textFormatIsVisible) {
-                    VStack {
-                        Picker("Font Weights", selection: self.$viewModel.fontWeight) {
-                            ForEach(self.viewModel.fontWeights, id: \.self) { weight in
-                                Image(systemName: "textformat")
-                                    .font(.system(size: 10, weight: weight))
-                                    .tag(weight)
-                            }
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
-                        HStack {
-                            Image(systemName: "textformat")
-                                .font(.system(size: 10))
-                            Slider(value: self.$viewModel.fontSize, in: 0...120)
-                            Image(systemName: "textformat")
-                                .font(.system(size: 20))
-                        }
-                    }
+                .padding(.trailing)
+                .popover(isPresented: self.$textFormatIsVisible) {
+                    TextFormatView(
+                        fontSize: self.$fontSize,
+                        fontWeight: self.$fontWeight
+                    )
                     .padding()
                 }
             }
-            List(
-                Symbols.symbols
-                    .filter { self.viewModel.keyword.isEmpty ? true : $0.contains(self.viewModel.keyword) },
-                id: \.self
-            ) { name in
-                HStack {
-                    Spacer()
-                    VStack {
-                        Image(systemName: name)
-                            .font(.system(size: CGFloat(self.viewModel.fontSize), weight: self.viewModel.fontWeight))
-                            .padding()
-                        HStack {
-                            Text(name)
-                            Button(action: {
-                                UIPasteboard.general.string = name
-                            }) {
-                                Image(systemName: "doc.on.clipboard")
-                            }
-                        }
+            ScrollView {
+                LazyVGrid(columns: self.columns) {
+                    ForEach(self.symbols, id: \.self) { name in
+                        SymbolView(
+                            name: name,
+                            fontSize: self.$fontSize,
+                            fontWeight: self.$fontWeight
+                        )
+                        .padding()
                     }
-                    Spacer()
+                    .id(UUID())
                 }
-                .padding()
             }
-            .id(UUID())
-            Spacer()
         }
     }
 }
