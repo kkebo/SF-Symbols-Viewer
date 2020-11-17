@@ -5,6 +5,7 @@ struct ContentView {
     @State var keyword = ""
     @State var fontSize = 60.0
     @State var fontWeight = Font.Weight.regular
+    @State var renderingMode = Image.TemplateRenderingMode.template
     @State var textFormatIsVisible = false
     let columns = [GridItem(.adaptive(minimum: 200))]
 
@@ -30,7 +31,8 @@ extension ContentView: View {
                 .popover(isPresented: self.$textFormatIsVisible) {
                     TextFormatView(
                         fontSize: self.$fontSize,
-                        fontWeight: self.$fontWeight
+                        fontWeight: self.$fontWeight,
+                        renderingMode: self.$renderingMode
                     )
                     .padding()
                 }
@@ -41,7 +43,8 @@ extension ContentView: View {
                         SymbolView(
                             name: name,
                             fontSize: self.$fontSize,
-                            fontWeight: self.$fontWeight
+                            fontWeight: self.$fontWeight,
+                            renderingMode: self.$renderingMode
                         )
                         .padding()
                     }

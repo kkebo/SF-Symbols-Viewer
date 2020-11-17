@@ -4,15 +4,18 @@ public struct SymbolView {
     let name: String
     @Binding var fontSize: Double
     @Binding var fontWeight: Font.Weight
+    @Binding var renderingMode: Image.TemplateRenderingMode
 
     public init(
         name: String,
         fontSize: Binding<Double>,
-        fontWeight: Binding<Font.Weight>
+        fontWeight: Binding<Font.Weight>,
+        renderingMode: Binding<Image.TemplateRenderingMode>
     ) {
         self.name = name
         self._fontSize = fontSize
         self._fontWeight = fontWeight
+        self._renderingMode = renderingMode
     }
 
     func copy() {
@@ -24,6 +27,7 @@ extension SymbolView: View {
     public var body: some View {
         VStack {
             Image(systemName: self.name)
+                .renderingMode(self.renderingMode)
                 .font(
                     .system(
                         size: CGFloat(self.fontSize),
