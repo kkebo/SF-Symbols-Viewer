@@ -9,7 +9,7 @@
 	<key>ContentIdentifier</key>
 	<string>xyz.kebo.playgroundbook.SF-Symbols-Viewer.SF-Symbols-Viewer</string>
 	<key>ContentVersion</key>
-	<string>2.0.0</string>
+	<string>2.1.0</string>
 	<key>DeploymentTarget</key>
 	<string>ios-current</string>
 	<key>DevelopmentRegion</key>
