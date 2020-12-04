@@ -34,6 +34,7 @@ extension TextFormatView: View {
                 Image(systemName: "textformat.size.larger")
                     .font(.system(size: 20))
             }
+            .padding(.vertical)
             Picker("Rendering Mode", selection: self.$renderingMode) {
                 ForEach(Image.TemplateRenderingMode.allCases, id: \.self) { mode in
                     Text(mode.description)
