@@ -21,8 +21,10 @@ struct ContentView {
             .filter { self.keyword.isEmpty ? true : $0.contains(self.keyword) }
     }
 
-    func showTextFormat() {
-        self.textFormatIsVisible = true
+    func toggleTextFormat() {
+        withAnimation {
+            self.textFormatIsVisible.toggle()
+        }
     }
 
     func toggleSearchBar() {
@@ -39,6 +41,14 @@ extension ContentView: View {
             VStack {
                 if self.searchIsVisible {
                     SearchBar(text: self.$keyword)
+                }
+                if self.textFormatIsVisible {
+                    TextFormatView(
+                        fontSize: self.$fontSize,
+                        fontWeight: self.$fontWeight,
+                        renderingMode: self.$renderingMode
+                    )
+                    .padding()
                 }
                 ScrollView {
                     LazyVGrid(columns: self.columns) {
@@ -68,16 +78,9 @@ extension ContentView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: self.showTextFormat) {
+                    Button(action: self.toggleTextFormat) {
+                        // TODO: Toggle icon
                         Image(systemName: "textformat")
-                    }
-                    .popover(isPresented: self.$textFormatIsVisible) {
-                        TextFormatView(
-                            fontSize: self.$fontSize,
-                            fontWeight: self.$fontWeight,
-                            renderingMode: self.$renderingMode
-                        )
-                        .padding()
                     }
                 }
             }
