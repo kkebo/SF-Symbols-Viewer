@@ -7,6 +7,7 @@ struct ContentView {
     @State var fontWeight = Font.Weight.regular
     @State var renderingMode = Image.TemplateRenderingMode.template
     @State var textFormatIsVisible = false
+    @State var searchIsVisible = false
 
     var columns: [GridItem] {
         [self.fontSize * 2].lazy
@@ -23,41 +24,65 @@ struct ContentView {
     func showTextFormat() {
         self.textFormatIsVisible = true
     }
+
+    func toggleSearchBar() {
+        self.keyword.removeAll()
+        withAnimation {
+            self.searchIsVisible.toggle()
+        }
+    }
 }
 
 extension ContentView: View {
     var body: some View {
-        VStack {
-            HStack {
-                SearchBar(text: self.$keyword)
-                Button(action: self.showTextFormat) {
-                    Image(systemName: "textformat")
+        NavigationView {
+            VStack {
+                if self.searchIsVisible {
+                    SearchBar(text: self.$keyword)
                 }
-                .padding(.trailing)
-                .popover(isPresented: self.$textFormatIsVisible) {
-                    TextFormatView(
-                        fontSize: self.$fontSize,
-                        fontWeight: self.$fontWeight,
-                        renderingMode: self.$renderingMode
-                    )
-                    .padding()
+                ScrollView {
+                    LazyVGrid(columns: self.columns) {
+                        ForEach(self.symbols, id: \.self) { name in
+                            SymbolView(
+                                name: name,
+                                fontSize: self.$fontSize,
+                                fontWeight: self.$fontWeight,
+                                renderingMode: self.$renderingMode
+                            )
+                            .padding()
+                        }
+                        .id(UUID())
+                    }
                 }
             }
-            ScrollView {
-                LazyVGrid(columns: self.columns) {
-                    ForEach(self.symbols, id: \.self) { name in
-                        SymbolView(
-                            name: name,
+            .navigationTitle("\(self.symbols.count) symbols")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: self.toggleSearchBar) {
+                        Image(
+                            systemName: self.searchIsVisible
+                                ? "magnifyingglass.circle.fill"
+                                : "magnifyingglass.circle"
+                        )
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: self.showTextFormat) {
+                        Image(systemName: "textformat")
+                    }
+                    .popover(isPresented: self.$textFormatIsVisible) {
+                        TextFormatView(
                             fontSize: self.$fontSize,
                             fontWeight: self.$fontWeight,
                             renderingMode: self.$renderingMode
                         )
                         .padding()
                     }
-                    .id(UUID())
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
