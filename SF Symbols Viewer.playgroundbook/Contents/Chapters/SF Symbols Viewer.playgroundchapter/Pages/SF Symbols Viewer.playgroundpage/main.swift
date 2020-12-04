@@ -7,7 +7,13 @@ struct ContentView {
     @State var fontWeight = Font.Weight.regular
     @State var renderingMode = Image.TemplateRenderingMode.template
     @State var textFormatIsVisible = false
-    let columns = [GridItem(.adaptive(minimum: 200))]
+
+    var columns: [GridItem] {
+        [self.fontSize * 2].lazy
+            .map { max($0, 120) }
+            .map { CGFloat($0) }
+            .map { .init(.adaptive(minimum: $0)) }
+    }
 
     var symbols: [String] {
         Symbols.symbols
