@@ -25,7 +25,7 @@ extension ContentView: View {
             HStack {
                 SearchBar(text: self.$keyword)
                 Button(action: self.showTextFormat) {
-                    Image(systemName: "textformat.size")
+                    Image(systemName: "textformat")
                 }
                 .padding(.trailing)
                 .popover(isPresented: self.$textFormatIsVisible) {

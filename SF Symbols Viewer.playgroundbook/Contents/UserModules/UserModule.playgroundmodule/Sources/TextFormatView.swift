@@ -28,10 +28,10 @@ extension TextFormatView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             HStack {
-                Image(systemName: "textformat")
-                    .font(.system(size: 10))
+                Image(systemName: "textformat.size.smaller")
+                    .font(.system(size: 20))
                 Slider(value: self.$fontSize, in: 0...120)
-                Image(systemName: "textformat")
+                Image(systemName: "textformat.size.larger")
                     .font(.system(size: 20))
             }
             Picker("Rendering Mode", selection: self.$renderingMode) {
