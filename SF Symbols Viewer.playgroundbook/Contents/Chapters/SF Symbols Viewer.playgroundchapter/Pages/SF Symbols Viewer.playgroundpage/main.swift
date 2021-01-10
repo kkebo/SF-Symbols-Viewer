@@ -6,6 +6,7 @@ struct ContentView {
     @State var fontSize = 60.0
     @State var fontWeight = Font.Weight.regular
     @State var renderingMode = Image.TemplateRenderingMode.template
+    @State var color = Color.white
     @State var textFormatIsVisible = false
     @State var searchIsVisible = false
 
@@ -46,7 +47,8 @@ extension ContentView: View {
                     TextFormatView(
                         fontSize: self.$fontSize,
                         fontWeight: self.$fontWeight,
-                        renderingMode: self.$renderingMode
+                        renderingMode: self.$renderingMode,
+                        color: self.$color
                     )
                     .padding()
                 }
@@ -57,7 +59,8 @@ extension ContentView: View {
                                 name: name,
                                 fontSize: self.$fontSize,
                                 fontWeight: self.$fontWeight,
-                                renderingMode: self.$renderingMode
+                                renderingMode: self.$renderingMode,
+                                color: self.$color
                             )
                             .padding()
                         }

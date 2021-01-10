@@ -4,15 +4,18 @@ public struct TextFormatView {
     @Binding var fontSize: Double
     @Binding var fontWeight: Font.Weight
     @Binding var renderingMode: Image.TemplateRenderingMode
+    @Binding var color: Color
 
     public init(
         fontSize: Binding<Double>,
         fontWeight: Binding<Font.Weight>,
-        renderingMode: Binding<Image.TemplateRenderingMode>
+        renderingMode: Binding<Image.TemplateRenderingMode>,
+        color: Binding<Color>
     ) {
         self._fontSize = fontSize
         self._fontWeight = fontWeight
         self._renderingMode = renderingMode
+        self._color = color
     }
 }
 
@@ -35,12 +38,17 @@ extension TextFormatView: View {
                     .font(.system(size: 20))
             }
             .padding(.vertical)
-            Picker("Rendering Mode", selection: self.$renderingMode) {
-                ForEach(Image.TemplateRenderingMode.allCases, id: \.self) { mode in
-                    Text(mode.description)
+            HStack {
+                Picker("Rendering Mode", selection: self.$renderingMode) {
+                    ForEach(Image.TemplateRenderingMode.allCases, id: \.self) { mode in
+                        Text(mode.description)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                ColorPicker(selection: self.$color) {
+                    EmptyView()
                 }
             }
-            .pickerStyle(SegmentedPickerStyle())
         }
     }
 }
