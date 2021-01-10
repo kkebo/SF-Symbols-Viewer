@@ -11,14 +11,14 @@
             "overviewSubtitle": "SF Symbols Browser for iPadOS.",
             "description": "You can browse SF Symbols.",
             "contentIdentifier": "xyz.kebo.playgroundbook.SF-Symbols-Viewer.SF-Symbols-Viewer",
-            "contentVersion": "2.2.0",
+            "contentVersion": "2.3.0",
             "url": "https://kebo.xyz/SF-Symbols-Viewer/SF%20Symbols%20Viewer.playgroundbook.zip",
             "publishedDate": "2019-10-11T00:16:00+0900",
-            "lastUpdatedDate": "2020-12-04T17:20:20+00:00",
-            "thumbnailURL": "https://raw.githubusercontent.com/kkk669/SF-Symbols-Viewer/v2.2.0/images/thumbnail.png",
-            "bannerImageURL": "https://raw.githubusercontent.com/kkk669/SF-Symbols-Viewer/v2.2.0/images/banner.png",
+            "lastUpdatedDate": "2021-01-10T04:15:44+00:00",
+            "thumbnailURL": "https://raw.githubusercontent.com/kkk669/SF-Symbols-Viewer/v2.3.0/images/thumbnail.png",
+            "bannerImageURL": "https://raw.githubusercontent.com/kkk669/SF-Symbols-Viewer/v2.3.0/images/banner.png",
             "previewImageURLs": [
-                "https://raw.githubusercontent.com/kkk669/SF-Symbols-Viewer/v2.2.0/images/preview.png"
+                "https://raw.githubusercontent.com/kkk669/SF-Symbols-Viewer/v2.3.0/images/preview.png"
             ],
             "additionalInformation": [
                 {
